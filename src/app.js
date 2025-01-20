@@ -14,7 +14,7 @@ app.post("/signup", async (req, res) => {
 
     res.send("User Added Successfully");
   } catch (error) {
-    res.status(500).send("Error during creating user");
+    res.status(500).send("Error during creating user"+error);
   }
 });
 
@@ -69,11 +69,26 @@ app.delete("/user", async (req, res) => {
   }
 });
 
-app.patch("/user", async (req, res) => {
+app.patch("/user/:userId", async (req, res) => {
   const userId = req.body.userId;
 
   const data = req.body;
+
   try {
+    const ALLOWED_UPDATE = ["photoUrl", "about", "skills", "gender", "age"];
+
+    const isUpdateAllowed = Object.keys(data).every((k) =>
+      ALLOWED_UPDATE.includes(k)
+    );
+
+    if (!isUpdateAllowed) {
+      throw new Error("update are not allowed");
+    }
+
+    if (data.skills.length > 10) {
+      throw new Error("Skills can not be more than 10");
+    }
+
     await User.findByIdAndUpdate({ _id: userId }, data);
     res.send("user updated successfully");
   } catch (error) {
