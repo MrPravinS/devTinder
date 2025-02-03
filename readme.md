@@ -17,3 +17,12 @@ install cookie parser
 
  create  schema method to getJWT()
  create  userSchema method to comparePaasword(passwordInputByUser)
+
+- explore tinder
+-create a list all api you can think of in          devTinder
+- Group multiple routes under respective routers
+- read doc for express router
+- create routes for managing auth, profile, request routers
+- create authRouter, profileROuter, requestRouter
+- Import this routers in app.js
+
