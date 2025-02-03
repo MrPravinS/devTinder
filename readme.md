@@ -25,4 +25,8 @@ install cookie parser
 - create routes for managing auth, profile, request routers
 - create authRouter, profileROuter, requestRouter
 - Import this routers in app.js
+- create POST /logout Api
+- create PATCH /profile/edit Api
+- create PATCH /profile/password Api => forgot Password APi
+- make you validate all data in every post , patch apis
 
