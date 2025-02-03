@@ -25,7 +25,7 @@ const validateEditProfileData = (req) => {
   ];
 
   const isAllowed = Object.keys(req.body).every(field=>allowedMethods.includes(field));
-
+   return isAllowed
 };
 
 module.exports = { validateSignUpData , validateEditProfileData};
