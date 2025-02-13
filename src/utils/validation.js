@@ -24,8 +24,10 @@ const validateEditProfileData = (req) => {
     "skills",
   ];
 
-  const isAllowed = Object.keys(req.body).every(field=>allowedMethods.includes(field));
-   return isAllowed
+  const isAllowed = Object.keys(req.body).every((field) =>
+    allowedMethods.includes(field)
+  );
+  return isAllowed;
 };
 
-module.exports = { validateSignUpData , validateEditProfileData};
+module.exports = { validateSignUpData, validateEditProfileData };
