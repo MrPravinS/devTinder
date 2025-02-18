@@ -29,4 +29,6 @@ install cookie parser
 - create PATCH /profile/edit Api
 - create PATCH /profile/password Api => forgot Password APi
 - make you validate all data in every post , patch apis
-
+- when user is more the db queries are more enpensiove for that add indexing in db for making it faster
+- read more about indexing
+- why do we need index
