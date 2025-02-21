@@ -1,7 +1,7 @@
 const express = require("express");
 const { userAuth } = require("../middlewares/auth");
 const ConnectionRequest = require("../models/connectionRequest");
-const User = require("../models/user")
+const User = require("../models/user");
 const requestRouter = express.Router();
 
 requestRouter.post(
@@ -19,8 +19,7 @@ requestRouter.post(
           .status(400)
           .json({ message: "Invalid status type: " + status });
       }
-     // check user cant send connection req to ourself
-      
+      // check user cant send connection req to ourself
 
       // check the user exist or not in db
       const toUser = await User.findById(toUserId);
@@ -57,4 +56,38 @@ requestRouter.post(
   }
 );
 
+requestRouter.post(
+  "request/reviews/:status/:requestId",
+  userAuth,
+  async (req, res) => {
+    try {
+      const loggedInUser = req.user;
+      const { status } = req.params;
+      // pravin => ajay
+      // is ajay loggedIn user
+      // status = interested
+      // request id should be valid
+
+      const allowedStatus = ["accepted", "rejected"];
+      if (!allowedStatus.includes(status)) {
+        return res.status(400).json({ message: "Status not allowed" });
+      }
+      const connectionRequest = await ConnectionRequest.findOne({
+        _id: requestId,
+        toUserId: loggedInUser._id,
+        status: "interested",
+      });
+
+      if(!connectionRequest){
+        return res.status(404).json({message:"Connection request not found"})
+      }
+
+      connectionRequest.status = status
+      const data = await this.connectionRequest.save();
+      res.json({message:"Connection request " + status, data})
+    } catch (error) {
+      res.status(400).send("ERROR: " + error.message);
+    }
+  }
+);
 module.exports = requestRouter;

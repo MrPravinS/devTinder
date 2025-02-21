@@ -10,10 +10,8 @@ PATCH /profile/edit
 PATCH /profile/password
 
 connectionRequestRouter
-POST / /request/send/interested/:userId
-POST / /request/send/ignore/:userId
-POST / /request/send/accepted/:userId
-POST / /request/send/rejected/:userId
+POST /request/send/interested/:userId
+POST /request/reviews/:status/:requestId
 
 
 userRouter
